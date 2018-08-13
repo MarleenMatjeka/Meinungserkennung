@@ -6,8 +6,6 @@ public class Tweet {
 	private String opinion;
 	private String sentiment;
 	
-	private int[] N1GramList = new int[30];
-	private int[][] N3GramList = new int[30][3];
 	
 	public Tweet(String content, String target, String stance, String opinion, String sentiment) {
 		this.content= content;
@@ -37,24 +35,9 @@ public class Tweet {
 		return content;
 	}
 	
-	public int[] getN1GramList() {
-		return N1GramList;
-	}
-	
-	public int[][] getN3GramList(){
-		return N3GramList;
-	}
 	
 	public void setContent(String content) {
 		this.content = content;
-	}
-	
-	public void setN1GramList(int[] N1GramList) {
-		this.N1GramList = N1GramList;
-	}
-	
-	public void setN3GramList(int[][] N3GramList) {
-		this.N3GramList = N3GramList;
 	}
 	
 	
