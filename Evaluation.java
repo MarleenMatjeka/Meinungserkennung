@@ -10,12 +10,12 @@ import java.util.ArrayList;
 public class Evaluation {
 	
 	/*
-	 * für ein gegebenes n die Statistiken berechnen
-	 * dazu gehört:
-	 * F-Score für jedes Target
-	 * F-microT = Durchschnitt über alle Werte der Targets zusammen
+	 * fÃ¼r ein gegebenes n die Statistiken berechnen
+	 * dazu gehÃ¶rt:
+	 * F-Score fÃ¼r jedes Target
+	 * F-microT = Durchschnitt Ã¼ber alle Werte der Targets zusammen
 	 * F-macroT = Durchschnitt der F-Werte der einzelnen Targets
-	 * Benötigt die Dateien <nTarget>.test <nTarget>.out für jedes Thema. Diese können vorher mit createTargetSeperatedInputFiles erzeugt und dann trainiert werden
+	 * BenÃ¶tigt die Dateien <nTarget>.test <nTarget>.out fÃ¼r jedes Thema. Diese kÃ¶nnen vorher mit createTargetSeperatedInputFiles erzeugt und dann trainiert werden
 	 */
 	public void evaluate(int n) {
 		double fmicroT = 0;
@@ -27,7 +27,7 @@ public class Evaluation {
 		double fscoreClinton = 0;
 		
 		// zur Berechnung von F-macroT
-		// erstelle die Statistiken für jedes target und hole den f wert 
+		// erstelle die Statistiken fÃ¼r jedes target und hole den f wert 
 		try {
 			fscoreAbortion = createFscoreForTarget("n"+n+"Abortion.test", "n"+n+"Abortion.out", "n"+n+"AbortionStatistics.txt");
 			fscoreAtheism = createFscoreForTarget("n"+n+"Atheism.test", "n"+n+"Atheism.out", "n"+n+"AtheismStatistics.txt");
@@ -42,16 +42,8 @@ public class Evaluation {
 		fmacroT = (fscoreAbortion+fscoreAtheism+fscoreClimate+fscoreClinton+fscoreFeminist)/5;
 		
 		//f-microT berechnen:
-		// eine große Testdatei erstellen
-		try {
-		/*concatFiles(new String[] {"n"+n+"Abortion.test", "n"+n+"Atheism.test", "n"+n+"Climate.test", "n"+n+"Clinton.test", "n"+n+"Feminist.test"}, 
-				"C:/Users/Marleen/Documents/Semester7/Seminar/Implementierung/libsvm-3.22/libsvm-3.22/windows", 
-				"n"+n+"FmicroT.test");
-		
-		concatFiles(new String[] {"n"+n+"Abortion.out", "n"+n+"Atheism.out", "n"+n+"Climate.out", "n"+n+"Clinton.out", "n"+n+"Feminist.out"}, 
-				"C:/Users/Marleen/Documents/Semester7/Seminar/Implementierung/libsvm-3.22/libsvm-3.22/windows", 
-				"n"+n+"FmicroT.out");*/
-		
+		// eine groÃŸe Testdatei erstellen
+		try {		
 		concatFiles("n"+n+"Abortion.test", "n"+n+"Atheism.test","n"+n+ "AA.test", n);
 		concatFiles("n"+n+"Climate.test", "n"+n+"Clinton.test","n"+n+ "CC.test", n);
 		concatFiles("n"+n+"AA.test", "n"+n+"CC.test","n"+n+ "AC.test", n);
@@ -65,7 +57,7 @@ public class Evaluation {
 			fmicroT = createFscoreForTarget("n"+n+ "FmicroT.test", "n"+n+ "FmicroT.out", "n"+n+"FmicroTStatistics.txt");
 			
 			
-			// tempfiles wieder löschen
+			// tempfiles wieder lÃ¶schen
 			
 			
 		} catch (IOException e1) {
@@ -77,7 +69,7 @@ public class Evaluation {
 		
 		try(FileWriter fw = new FileWriter(new File("C:/Users/Marleen/Documents/Semester7/Seminar/Implementierung/libsvm-3.22/libsvm-3.22/Statistiken/n"+n+"Statistics.txt"))){
 			DecimalFormat df = new DecimalFormat("###.###");
-			fw.write("Statistiken für N="+n+
+			fw.write("Statistiken fÃ¼r N="+n+
 					"\nF-microT: "+ df.format(fmicroT)+
 					"\nF-macroT: "+df.format(fmacroT)+
 					"\nF-Score Abortion: "+df.format(fscoreAbortion)+
@@ -100,10 +92,10 @@ public class Evaluation {
 	
 	/*
 	 * Wird von evaluate() benutzt
-	 * berechnet die Statistiken und den F-Wert für ein Target (eine KOmbination aus Test und Out file)
-	 * übergeben werden muss der name mit Dateiendung des .test files, der name mit Dateiendung des out. files und der Name mit Dateiendung der Evaluierungsdatei, die erstellt werden soll
+	 * berechnet die Statistiken und den F-Wert fÃ¼r ein Target (eine KOmbination aus Test und Out file)
+	 * Ã¼bergeben werden muss der name mit Dateiendung des .test files, der name mit Dateiendung des out. files und der Name mit Dateiendung der Evaluierungsdatei, die erstellt werden soll
 	 * erstellt wird dann eine Evaluierungsdatei mit den Statistiken
-	 * F-score berechnen, dieser wird auch zurückgegeben
+	 * F-score berechnen, dieser wird auch zurÃ¼ckgegeben
 	 * FAVOR = 1
 	 * AGAINST = 2
 	 * NONE = 3
@@ -127,7 +119,7 @@ public class Evaluation {
 		try(BufferedReader readerTest = new BufferedReader(new FileReader("C:/Users/Marleen/Documents/Semester7/Seminar/Implementierung/libsvm-3.22/libsvm-3.22/windows/"+testfile));
 				BufferedReader readerOut = new BufferedReader(new FileReader("C:/Users/Marleen/Documents/Semester7/Seminar/Implementierung/libsvm-3.22/libsvm-3.22/windows/"+outputfile));
 				FileWriter fw = new FileWriter(new File("C:/Users/Marleen/Documents/Semester7/Seminar/Implementierung/libsvm-3.22/libsvm-3.22/Statistiken/"+evaluationfile))){ 
-			while(readerTest.ready() && readerOut.ready()) {		//Werte vergleichen und zählen
+			while(readerTest.ready() && readerOut.ready()) {		//Werte vergleichen und zÃ¤hlen
 				lineTest = readerTest.readLine();
 				lineOut = readerOut.readLine();
 				gesamtanzahl++;
@@ -187,7 +179,7 @@ public class Evaluation {
 		fscore = (FscoreFAVOR+FscoreAGAINST)/2;
 		
 		DecimalFormat df = new DecimalFormat("###.###");
-		fw.write("Statistik für "+outputfile+
+		fw.write("Statistik fÃ¼r "+outputfile+
 				"\nAnzahl aller Tweets: "+(int)gesamtanzahl+
 				"\ndavon korrekt klassifiziert: "+(int)richtigKlassifiziert+
 				"\nAnzahl FAVOR Items: "+(int)FAVORitems+
@@ -209,8 +201,8 @@ public class Evaluation {
 	
 	/*
 	 * Wird von evaluate() benutzt
-	 * Für StatistikenPfad 
-	 * mit Leerzeilen für die Lesbarkeit
+	 * FÃ¼r StatistikenPfad 
+	 * mit Leerzeilen fÃ¼r die Lesbarkeit
 	 * liste muss mind. 2 files enthalten
 	 */
 	public void concatFilesStatistiken(String[] files, String resultFile) throws IOException {
@@ -266,7 +258,7 @@ public class Evaluation {
 			line = reader1.readLine();
 			writer.write(line);
 			writer.write("\n");
-			System.out.println("line geschrieben für i= "+i+"line: "+line);
+			System.out.println("line geschrieben fÃ¼r i= "+i+"line: "+line);
 		}
 		System.out.println("erste while schleife: file 1 wurde geschrieben");
 		while(reader2.ready()) {
