@@ -48,7 +48,7 @@ public class Mainclass {
 
 	
 	/*
-	 * Mapping für trainings und testdaten für ngramme der Größe 1 bis 3
+	 * Mapping fÃ¼r trainings und testdaten fÃ¼r ngramme bis zur GrÃ¶ÃŸe n
 	 */
 	public static void createMapping(int n) {
 		int mappingvalue = 1;
@@ -58,9 +58,9 @@ public class Mainclass {
 			
 		readTweets("train.csv");				// tweets einlesen
 		System.out.println("train.csv einlesen: "+checkTweetlist(tweetlist));
-		for(Tweet t : tweetlist) {				// für jeden tweet
-			for(int i = 1; i<=n; i++) {			// werden ngramme erzeugt von n=1 bis n=9
-				ArrayList<String> ngrams = otto.buildNgram(t.getContent(), i);		//ngramme für diesen tweet erzeugen
+		for(Tweet t : tweetlist) {				// fÃ¼r jeden tweet
+			for(int i = 1; i<=n; i++) {			// werden ngramme erzeugt von 1 bis n
+				ArrayList<String> ngrams = otto.buildNgram(t.getContent(), i);		//ngramme fÃ¼r diesen tweet erzeugen
 				for(String s : ngrams) {		// jedes ngramm
 					if(!map.containsKey(s)) {	// 
 						map.put(s, mappingvalue);	// kommt in die hashmap wenn es noch nicht vorhanden ist 
@@ -75,9 +75,9 @@ public class Mainclass {
 		
 		readTweets("test.csv");				// tweets einlesen
 		System.out.println("test.csv einlesen: "+checkTweetlist(tweetlist));
-		for(Tweet t : tweetlist) {				// für jeden tweet
-			for(int i = 1; i<=n; i++) {			// werden ngramme erzeugt von n=1 bis n=9
-				ArrayList<String> ngrams = otto.buildNgram(t.getContent(), i);		//ngramme für diesen tweet erzeugen
+		for(Tweet t : tweetlist) {				// fÃ¼r jeden tweet
+			for(int i = 1; i<=n; i++) {			// werden ngramme erzeugt von 1 bis n
+				ArrayList<String> ngrams = otto.buildNgram(t.getContent(), i);		//ngramme fÃ¼r diesen tweet erzeugen
 				for(String s : ngrams) {		// jedes ngramm
 					if(!map.containsKey(s)) {	// 
 						map.put(s, mappingvalue);	// kommt in die hashmap wenn es noch nicht vorhanden ist 
@@ -94,7 +94,7 @@ public class Mainclass {
 		
 	}
 	
-	/*
+	/*Inputdatei fÃ¼r die SVM erzeugen
 	 * Ohne Separierung der Targets
 	 */
 	public static void createInputFile2(ArrayList<Tweet> tweetlist, int n, String inputfile, String outputfile) {
@@ -120,8 +120,8 @@ public class Mainclass {
 				// ngramme nachgucken und indizes sortieren
 				ArrayList<Integer> indizes = new ArrayList<>();
 				for(String s : ngrams) {
-					int index = lookup(s);		// passende Zahl für das Ngramm holen
-					if(!indizes.contains(index))		//für den fall das zwei ngramme auf die gleiche zahl gemappt wurden, wird der index nicht doppelt eingefügt
+					int index = lookup(s);		// passende Zahl fÃ¼r das Ngramm holen
+					if(!indizes.contains(index))		//fÃ¼r den fall das zwei ngramme auf die gleiche zahl gemappt wurden, wird der index nicht doppelt eingefÃ¼gt
 					indizes.add(index);
 				}
 				Collections.sort(indizes);
@@ -137,7 +137,7 @@ public class Mainclass {
 	}
 	
 	/*
-	 * Datei die mono-, bi- und trigramme enthält
+	 * Datei die mono-, bi- und trigramme enthÃ¤lt
 	 * Ohne Separierung der Targets
 	 */
 	public static void createInputFile3(ArrayList<Tweet> tweetlist, String inputfile, String outputfile) {
@@ -165,18 +165,18 @@ public class Mainclass {
 				// ngramme nachgucken und indizes sortieren
 				ArrayList<Integer> indizes = new ArrayList<>();
 				for(String s : ngrams1) {
-					int index = lookup(s);		// passende Zahl für das Ngramm holen
-					if(!indizes.contains(index))		//für den fall das zwei ngramme auf die gleiche zahl gemappt wurden, wird der index nicht doppelt eingefügt
+					int index = lookup(s);		// passende Zahl fÃ¼r das Ngramm holen
+					if(!indizes.contains(index))		//fÃ¼r den fall das zwei ngramme auf die gleiche zahl gemappt wurden, wird der index nicht doppelt eingefÃ¼gt
 					indizes.add(index);
 				}
 				for(String s : ngrams2) {
-					int index = lookup(s);		// passende Zahl für das Ngramm holen
-					if(!indizes.contains(index))		//für den fall das zwei ngramme auf die gleiche zahl gemappt wurden, wird der index nicht doppelt eingefügt
+					int index = lookup(s);		// passende Zahl fÃ¼r das Ngramm holen
+					if(!indizes.contains(index))		//fÃ¼r den fall das zwei ngramme auf die gleiche zahl gemappt wurden, wird der index nicht doppelt eingefÃ¼gt
 					indizes.add(index);
 				}
 				for(String s : ngrams3) {
-					int index = lookup(s);		// passende Zahl für das Ngramm holen
-					if(!indizes.contains(index))		//für den fall das zwei ngramme auf die gleiche zahl gemappt wurden, wird der index nicht doppelt eingefügt
+					int index = lookup(s);		// passende Zahl fÃ¼r das Ngramm holen
+					if(!indizes.contains(index))		//fÃ¼r den fall das zwei ngramme auf die gleiche zahl gemappt wurden, wird der index nicht doppelt eingefÃ¼gt
 					indizes.add(index);
 				}
 				Collections.sort(indizes);
@@ -195,8 +195,8 @@ public class Mainclass {
 	
 	
 	/*
-	 * erzeugt 5 Inputdateien für die SVM, für jedes Thema eine 
-	 * bekommt die tweetlist, das n für die n-Gramme, Datei der Trainingsdaten im Ordner
+	 * erzeugt 5 Inputdateien fÃ¼r die SVM, fÃ¼r jedes Thema eine 
+	 * bekommt die tweetlist, das n fÃ¼r die n-Gramme, Datei der Trainingsdaten im Ordner
 	 * C:/Users/Marleen/Documents/Semester7/Seminar/Implementierung/stancedataset/
 	 * StanceDataset/ Dateiname, die die erzeugten inputfiles haben sollen
 	 * Dateiendung, die die erzeugten Inputfiles haben sollen. entweder train oder
@@ -227,9 +227,9 @@ public class Mainclass {
 				FileWriter fwFeminist = new FileWriter(fileFeminist);
 				FileWriter fwAbortion = new FileWriter(fileAbortion);
 				FileWriter fwAtheism = new FileWriter(fileAtheism);) {
-			for (Tweet t : tweetlist) { // für jeden Tweet aus der liste
-				switch (t.getTarget()) { // geprüft um welches target es sich handelt und danach wird der richtige
-											// writer ausgewählt
+			for (Tweet t : tweetlist) { // fÃ¼r jeden Tweet aus der liste
+				switch (t.getTarget()) { // geprÃ¼ft um welches target es sich handelt und danach wird der richtige
+											// writer ausgewÃ¤hlt
 				case "Atheism":
 					writeItem(fwAtheism, t.getStance(), t.getContent(), ns);
 					break;
@@ -259,7 +259,7 @@ public class Mainclass {
 	}
 	
 	/*
-	 * testet für alle seperaten Targetfiles
+	 * testet fÃ¼r alle seperaten Targetfiles
 	 */
 	public static void testSVMAll(int n) {
 		testSVM("n"+n+"Abortion.train");
@@ -271,25 +271,25 @@ public class Mainclass {
 
 	/* 
 	 * wird von tetsSVMAll() benutzt
-	 * Parameter für einzelne dateien testen
+	 * Parameter fÃ¼r einzelne dateien testen
 	 */
 	public static void testSVM(String file) {
 		String command = "";
 		
-		String result = ""; // Für die Kommandooutputs
+		String result = ""; // FÃ¼r die Kommandooutputs
 		int svmType = 0;
 		int kernelType = 0;	
 		int c = 0;
 		
 		try (FileWriter writer = new FileWriter(new File(
 				"C:/Users/Marleen/Documents/Semester7/Seminar/Implementierung/libsvm-3.22/libsvm-3.22/Statistiken/AuswertungParameterTesten"+file+".txt"))) {
-			while (svmType < 2) { // für svmtype 0 und 1
+			while (svmType < 2) { // fÃ¼r svmtype 0 und 1
 				while(kernelType < 4) {
 					while (c <= 2000) {
 						command = "cd C:/Users/Marleen/Documents/Semester7/Seminar/Implementierung/libsvm-3.22/libsvm-3.22/windows && svm-train.exe -s "
 								+ svmType + " -c "+c+" -h 0 -t " + kernelType + " -v 10 "+file;
 
-						// beide kommandos ausführen und in die Ergebnisdatei schreiben
+						// beide kommandos ausfÃ¼hren und in die Ergebnisdatei schreiben
 						result = executeCommand(command);
 						writer.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 						writer.write(command);
@@ -301,16 +301,16 @@ public class Mainclass {
 						writer.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
 						c = c +500;
-						System.out.println("c geändert");
+						System.out.println("c geÃ¤ndert");
 					}
 					kernelType++;
 					c = 0;
-					System.out.println("kerneltype geändert");
+					System.out.println("kerneltype geÃ¤ndert");
 				}	
 				svmType++;
 				kernelType = 0;
 				c = 0;
-				System.out.println("svmtype geändert");
+				System.out.println("svmtype geÃ¤ndert");
 				
 			}
 		} catch (IOException | InterruptedException e) {
@@ -321,7 +321,7 @@ public class Mainclass {
 	}
 	
 	/*
-	 * trainiert alle Dateien für die 5 Targets für das gegebene n
+	 * trainiert alle Dateien fÃ¼r die 5 Targets fÃ¼r das gegebene n
 	 */
 	public static void trainAll(int n, int svmType, int kernelType, int c) {
 
@@ -355,7 +355,7 @@ public class Mainclass {
 	
 	/*
 	 * 
-	 * Kommandozeile nutzen: Eingabe Befehl, gibt Konsolenausgabe zurück
+	 * Kommandozeile nutzen: Eingabe Befehl, gibt Konsolenausgabe zurÃ¼ck
 	 * Befehle mit && verbinden
 	 * Befehl zb.: "cd C:/Users/Marleen/Documents/Semester7/Seminar/Implementierung/libsvm-3.22/libsvm-3.22/windows && svm-predict.exe n3.test n3.train.model n3.out"
 	 */
@@ -386,19 +386,19 @@ public class Mainclass {
 	
 	/*
 	 * wird von createMapping() und createInputfile() und createTargetSeperatedInputfiles() benutzt
-	 * Liest die CSV Datei ein und füllt die tweetlist mit den einzelnen Tweets 
-	 * gibt true zurück, wenn erfolgreich
+	 * Liest die CSV Datei ein und fÃ¼llt die tweetlist mit den einzelnen Tweets 
+	 * gibt true zurÃ¼ck, wenn erfolgreich
 	 */
 	public static boolean readTweets(String filename) {
 		String rawTweet = "";
-		// int nummer = 0; // für testzwecke
+		// int nummer = 0; // fÃ¼r testzwecke
 		try ( // Trainingsdaten einlesen
 				BufferedReader reader = new BufferedReader(new FileReader(
 						"C:/Users/Marleen/Documents/Semester7/Seminar/Implementierung/stancedataset/StanceDataset/"
 								+ filename));) {
 			while (reader.ready()) {
 				rawTweet = reader.readLine(); // Datei zeilenweise auslesen, eine Zeile = ein Tweet mit allen Metadaten
-				// System.out.println("Tweet "+nummer+": "+tweet); // für testzwecke
+				// System.out.println("Tweet "+nummer+": "+tweet); // fÃ¼r testzwecke
 				// ++nummer;
 				Tweet tweet = stringToTweet(rawTweet); // die Zeile in ein Tweetobjekt umwandeln
 				tweetlist.add(tweet);
@@ -416,20 +416,20 @@ public class Mainclass {
 			e.printStackTrace();
 			System.out.println("Fehler beim konvertieren von String zu Tweet");
 		}
-		tweetlist.remove(0); // entfernt den ersten tweet da die erste zeile der Datei keinen tweet enthält
+		tweetlist.remove(0); // entfernt den ersten tweet da die erste zeile der Datei keinen tweet enthÃ¤lt
 		return checkTweetlist(tweetlist);
 	}
 		
 	/*
 	 * wird von readTweets() benutzt
-	 * Prüft, ob alle Tweets in der Tweetliste vollständig sind
+	 * PrÃ¼ft, ob alle Tweets in der Tweetliste vollstÃ¤ndig sind
 	 */
 	public static boolean checkTweetlist(ArrayList<Tweet> tweetlist) {
 		for (int i = 0; i < tweetlist.size(); i++) {
 			Tweet t = tweetlist.get(i);
 			if (t.getContent().isEmpty() || t.getTarget().isEmpty() || t.getStance().isEmpty()
 					|| t.getOpinion().isEmpty() || t.getSentiment().isEmpty()) {
-				// falls mind. ein Attribut nicht gefüllt ist
+				// falls mind. ein Attribut nicht gefÃ¼llt ist
 				System.out.println("mindestens ein Tweet hat nicht alle Werte \nTweet Nr: " + i);
 				return false;
 			}
@@ -442,7 +442,7 @@ public class Mainclass {
 	 * Wird von readTweets() benutzt
 	 * Wandelt die CSV datei in die einzelnen Tweets um 
 	 * Aufbau CSV Datei: Tweet,Target,Stance,Opinion Towards,Sentiment Wenn
-	 * Tweet oder Opinion Towards ein Komma enthält, so sind sie in "" gesetzt
+	 * Tweet oder Opinion Towards ein Komma enthÃ¤lt, so sind sie in "" gesetzt
 	 */
 	public static Tweet stringToTweet(String raw) {
 		String content = new String();
@@ -459,7 +459,7 @@ public class Mainclass {
 			while (true) { // zur Erkennung von escape ""
 				pointer2 = raw.indexOf('"', pointer);
 				if (raw.charAt(pointer2 + 1) == '"') { // falls der nachfolgende char auch ein " ist
-					pointer = pointer2 + 2; // überspringe die beiden ""
+					pointer = pointer2 + 2; // Ã¼berspringe die beiden ""
 				} else {
 					break;
 				}
@@ -515,11 +515,11 @@ public class Mainclass {
 		}
 		
 		ArrayList<Integer> indizes = new ArrayList<Integer>();	// sammelt die zahlenwerte aller vorkommenden ngramme (features)
-		for(int i = 0; i<ns.length; i++) {	// für jedes n 
+		for(int i = 0; i<ns.length; i++) {	// fÃ¼r jedes n 
 			ArrayList<String> ngrams = otto.buildNgram(tweetcontent, ns[i]);
 			for(String s : ngrams) {
-				int index = lookup(s);		// passende Zahl für das Ngramm holen
-				if(!indizes.contains(index))		//für den fall das zwei ngramme auf die gleiche zahl gemappt wurden, wird der index nicht doppelt eingefügt
+				int index = lookup(s);		// passende Zahl fÃ¼r das Ngramm holen
+				if(!indizes.contains(index))		//fÃ¼r den fall das zwei ngramme auf die gleiche zahl gemappt wurden, wird der index nicht doppelt eingefÃ¼gt
 				indizes.add(index);
 			}
 		}
@@ -533,7 +533,7 @@ public class Mainclass {
 
 	/*
 	 * wird von createInputfile() und createTargetSeperatedInputfiles() benutzt
-	 * gibt den Value für den key zurück
+	 * gibt den Value fÃ¼r den key zurÃ¼ck
 	 */
 	public static int lookup(String key) {
     	if (map.containsKey(key)) 
@@ -545,7 +545,7 @@ public class Mainclass {
     }
 
 	/*
-	 * für testzwecke
+	 * fÃ¼r testzwecke
 	 * gibt ein zweidimensionales String array auf der Konsole aus
 	 */
 	public static void printArray(String[][] array) {
@@ -559,8 +559,8 @@ public class Mainclass {
 	}
 
 	/*
-	 * für testzwecke
-	 * gibt den längsten und den kürzesten tweet aus dem file auf der konsole aus 
+	 * fÃ¼r testzwecke
+	 * gibt den lÃ¤ngsten und den kÃ¼rzesten tweet aus dem file auf der konsole aus 
 	 */
 	public static void printMinMaxTweets(String file) {
 		int max = 0;
@@ -574,6 +574,6 @@ public class Mainclass {
 			else if(count < min)
 				min = count;
 		}
-		System.out.println("längster Tweet: "+max+" kürzester Tweet: "+min);
+		System.out.println("lÃ¤ngster Tweet: "+max+" kÃ¼rzester Tweet: "+min);
 	}
 }
